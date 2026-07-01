@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Mastery Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent1: #00ff88;
+    --accent2: #0088ff;
+    --accent3: #ff6b35;
+    --accent4: #b388ff;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --c1: #00ff88;
+    --c2: #0088ff;
+    --c3: #ff6b35;
+    --c4: #b388ff;
+    --c5: #ffcc00;
+    --c6: #ff4488;
+    --c7: #00ccff;
+    --c8: #88ff44;
+    --c9: #ff8844;
+    --c10: #44ffcc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 50px 0 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+  }
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent1);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #fff 0%, var(--accent1) 50%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .header p {
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+    padding: 16px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Phase */
+  .phase {
+    margin-bottom: 32px;
+    animation: fadeUp 0.5s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .phase:nth-child(1) { animation-delay: 0.05s; }
+  .phase:nth-child(2) { animation-delay: 0.10s; }
+  .phase:nth-child(3) { animation-delay: 0.15s; }
+  .phase:nth-child(4) { animation-delay: 0.20s; }
+  .phase:nth-child(5) { animation-delay: 0.25s; }
+  .phase:nth-child(6) { animation-delay: 0.30s; }
+  .phase:nth-child(7) { animation-delay: 0.35s; }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .phase-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 3vw, 24px);
+    font-weight: 700;
+    flex: 1;
+  }
+  .phase-toggle {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .phase.collapsed .phase-toggle { transform: rotate(-90deg); }
+  .phase.collapsed .phase-body { display: none; }
+
+  .phase-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    flex: 1;
+  }
+  .card-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .badge {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .badge-course {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .badge-level {
+    background: rgba(0,0,0,0.3);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 12px;
+  }
+
+  .topics-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .topics-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .topics-list li {
+    font-size: 11px;
+    color: #a0a0b8;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .topics-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  .card-footer {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+
+  /* Extra topics section */
+  .extras-section {
+    margin-top: 50px;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(179,136,255,0.05), rgba(0,136,255,0.05));
+    border: 1px solid rgba(179,136,255,0.2);
+    border-radius: 12px;
+  }
+  .extras-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent4);
+    margin-bottom: 6px;
+  }
+  .extras-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .extras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .extra-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(179,136,255,0.15);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .extra-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .extra-source {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .extra-detail {
+    font-size: 10px;
+    color: #7a7a90;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 50px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Color classes for phases */
+  .ph1 .phase-title { color: var(--c1); }
+  .ph2 .phase-title { color: var(--c2); }
+  .ph3 .phase-title { color: var(--c3); }
+  .ph4 .phase-title { color: var(--c5); }
+  .ph5 .phase-title { color: var(--c6); }
+  .ph6 .phase-title { color: var(--c7); }
+  .ph7 .phase-title { color: var(--c4); }
+
+  .ph1 .card { border-color: rgba(0,255,136,0.12); }
+  .ph1 .card::before { background: var(--c1); }
+  .ph1 .card:hover { border-color: rgba(0,255,136,0.3); }
+  .ph1 .topics-list li::before { color: var(--c1); }
+
+  .ph2 .card { border-color: rgba(0,136,255,0.12); }
+  .ph2 .card::before { background: var(--c2); }
+  .ph2 .card:hover { border-color: rgba(0,136,255,0.3); }
+  .ph2 .topics-list li::before { color: var(--c2); }
+
+  .ph3 .card { border-color: rgba(255,107,53,0.12); }
+  .ph3 .card::before { background: var(--c3); }
+  .ph3 .card:hover { border-color: rgba(255,107,53,0.3); }
+  .ph3 .topics-list li::before { color: var(--c3); }
+
+  .ph4 .card { border-color: rgba(255,204,0,0.12); }
+  .ph4 .card::before { background: var(--c5); }
+  .ph4 .card:hover { border-color: rgba(255,204,0,0.3); }
+  .ph4 .topics-list li::before { color: var(--c5); }
+
+  .ph5 .card { border-color: rgba(255,68,136,0.12); }
+  .ph5 .card::before { background: var(--c6); }
+  .ph5 .card:hover { border-color: rgba(255,68,136,0.3); }
+  .ph5 .topics-list li::before { color: var(--c6); }
+
+  .ph6 .card { border-color: rgba(0,204,255,0.12); }
+  .ph6 .card::before { background: var(--c7); }
+  .ph6 .card:hover { border-color: rgba(0,204,255,0.3); }
+  .ph6 .topics-list li::before { color: var(--c7); }
+
+  .ph7 .card { border-color: rgba(179,136,255,0.12); }
+  .ph7 .card::before { background: var(--c4); }
+  .ph7 .card:hover { border-color: rgba(179,136,255,0.3); }
+  .ph7 .topics-list li::before { color: var(--c4); }
+
+  .ph8 .phase-title { color: var(--c10); }
+  .ph8 .card { border-color: rgba(68,255,204,0.12); }
+  .ph8 .card::before { background: var(--c10); }
+  .ph8 .card:hover { border-color: rgba(68,255,204,0.3); }
+  .ph8 .topics-list li::before { color: var(--c10); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-tag">// Teeno Courses — Unified Learning Path</div>
+    <h1>DevOps Mastery Roadmap</h1>
+    <p>Basics se Production-Grade Engineering tak — Step by Step</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#ff6b35"></div>
+      <span>Course 1 — TrainWithShubham (Free YouTube)</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#0088ff"></div>
+      <span>Course 2 — Imran Teli / Udemy DevOps</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#00ff88"></div>
+      <span>Course 3 — DevOps Bootcamp (KodeKloud-style)</span>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase ph1" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 01</div>
+      <div class="phase-title">🌱 Foundations — OS, Networking & Version Control</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Linux OS — Basics to Advanced</div>
+          <div class="card-icon">🐧</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Basic & Advanced Commands (AWK, GREP, FIND, SED)</li>
+          <li>Users, Groups & File Permissions</li>
+          <li>File Transfer, Networking Commands</li>
+          <li>Volume Management & LVM</li>
+        </ul>
+        <div class="card-footer">⏱ ~5h 45m — Sabse detailed Linux coverage</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Networking Fundamentals</div>
+          <div class="card-icon">🌐</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Understanding Networks & IP Addressing</li>
+          <li>Protocols & Ports</li>
+          <li>Networking Commands (ping, netstat, curl)</li>
+        </ul>
+        <div class="card-footer">⏱ ~38m — Structured theory + practice</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Git & GitHub</div>
+          <div class="card-icon">🔀</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>VCS Concepts, Branches, Merge, Rollback</li>
+          <li>Git Stash, Tags, Semantic Versioning</li>
+          <li>GitHub SSH, Copilot AI</li>
+          <li>Remote Repo Setup & Authentication</li>
+        </ul>
+        <div class="card-footer">⏱ ~2h+ — Most hands-on Git section</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Shell Scripting</div>
+          <div class="card-icon">📜</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Variables, Loops, Functions, Arguments</li>
+          <li>Cron Jobs, Process Management</li>
+          <li>AWS CLI Automation via Scripts</li>
+          <li>Debugging: set -x, bash -x, trap</li>
+        </ul>
+        <div class="card-footer">⏱ ~3h 10m — Deepest scripting coverage</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase ph2" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 02</div>
+      <div class="phase-title">⚙️ Virtualization, Cloud & IaC Basics</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Virtualization & Vagrant</div>
+          <div class="card-icon">💻</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>VM Setup (Windows, Mac Intel, M1)</li>
+          <li>Vagrant — IP, RAM, CPU, Sync Dirs</li>
+          <li>Provisioning & Multi-VM Vagrantfile</li>
+          <li>Website & WordPress automation</li>
+        </ul>
+        <div class="card-footer">⏱ ~2h+ — Practical VM setup with automation</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">AWS Cloud — Core Services</div>
+          <div class="card-icon">☁️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>EC2, EBS, EFS, S3, RDS, ELB</li>
+          <li>CloudWatch, Autoscaling Groups</li>
+          <li>IAM, VPC, NAT Gateway, Bastion Host</li>
+          <li>AWS CLI, SSM, CloudShell</li>
+        </ul>
+        <div class="card-footer">⏱ ~6h+ — Most comprehensive AWS section</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Python for DevOps</div>
+          <div class="card-icon">🐍</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Variables, DS, Loops, Functions, Modules</li>
+          <li>OS Tasks, Python Fabric</li>
+          <li>Boto3 for AWS Cloud automation</li>
+          <li>AI-assisted Cloud automation</li>
+        </ul>
+        <div class="card-footer">⏱ ~4h+ — Deepest Python DevOps coverage</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase ph3" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 03</div>
+      <div class="phase-title">🐳 Containers — Docker Deep Dive</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Docker — Architecture & Core Concepts</div>
+          <div class="card-icon">🐋</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Docker Architecture, Images, Dockerfile</li>
+          <li>Networking, Volumes & Storage</li>
+          <li>Docker Compose, Registry, Multi-stage Builds</li>
+          <li>2 Real Projects + Docker Scout/Init</li>
+        </ul>
+        <div class="card-footer">⏱ ~5h — Project-heavy, sabse detailed</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Docker Swarm & Orchestration</div>
+          <div class="card-icon">🔁</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive Topic</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Swarm Init, Services, Cluster Setup</li>
+          <li>Swarm Networks, Secrets, Stacks</li>
+          <li>Zero Downtime Upgrade, HealthCheck</li>
+          <li>Container Placement & Constraints</li>
+        </ul>
+        <div class="card-footer">⏱ ~4h — Swarm sirf Course 3 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Microservices with Docker</div>
+          <div class="card-icon">🧩</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Project</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Containerizing Microservice App</li>
+          <li>App + DB + Web Image Dockerfiles</li>
+          <li>Docker Compose for full stack</li>
+          <li>Build & Run Microservice App</li>
+        </ul>
+        <div class="card-footer">⏱ ~1.5h — Best microservice Docker project</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase ph4" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 04</div>
+      <div class="phase-title">🚀 CI/CD — Jenkins, GitHub Actions & GitLab</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Jenkins — Complete Deep Dive</div>
+          <div class="card-icon">🏗️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Freestyle, Declarative Pipeline</li>
+          <li>Jenkins Agents (Multi-Node)</li>
+          <li>Shared Libraries, Role-Based Access</li>
+          <li>CI/CD with K8s + ArgoCD + Prometheus</li>
+          <li>DevSecOps: OWASP, Trivy, SonarQube</li>
+        </ul>
+        <div class="card-footer">⏱ ~6h — Sabse advanced Jenkins section</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Jenkins — Plugin System & Pipeline Architecture</div>
+          <div class="card-icon">🔌</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive Detail</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Plugin Model, Offline Plugin Setup</li>
+          <li>Create Custom Jenkins Plugin</li>
+          <li>Docker in Jenkins Pipeline</li>
+          <li>Distributed Builds, Jenkins Slave</li>
+        </ul>
+        <div class="card-footer">⏱ ~5h — Plugin depth sirf Course 3 mein</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">GitHub Actions</div>
+          <div class="card-icon">⚡</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Workflows, Triggers, Secrets</li>
+          <li>Sonar Analysis + Quality Gates</li>
+          <li>Docker Build & Publish to ECR</li>
+          <li>Deploy to ECS + GitOps with EKS</li>
+        </ul>
+        <div class="card-footer">⏱ ~2h — End-to-end Actions pipeline</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">GitLab CI/CD</div>
+          <div class="card-icon">🦊</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>GitLab vs GitHub/BitBucket</li>
+          <li>Projects, Groups, Pipelines</li>
+          <li>Variables, Secrets, Artifacts</li>
+          <li>Self-hosted & SaaS Runners</li>
+          <li>Deployment via CI/CD Pipelines</li>
+        </ul>
+        <div class="card-footer">⏱ ~2h 40m — Dedicated GitLab section</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">AWS CodePipeline / Native CI/CD</div>
+          <div class="card-icon">🔶</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Exclusive Topic</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>AWS CodeCommit, CodeBuild, CodePipeline</li>
+          <li>SonarCloud integration</li>
+          <li>SNS Notifications, Beanstalk Deploy</li>
+        </ul>
+        <div class="card-footer">⏱ ~1.5h — AWS-native CI/CD only in Course 2</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase ph5" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 05</div>
+      <div class="phase-title">☸️ Kubernetes — From Basics to Production</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Kubernetes — Complete Mastery</div>
+          <div class="card-icon">🎛️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Architecture, KIND, Minikube, Kubeadm</li>
+          <li>Pods, Deployments, ReplicaSet, DaemonSet</li>
+          <li>HPA, VPA, RBAC, Taints/Tolerations</li>
+          <li>Istio Service Mesh, CRDs, Operators</li>
+          <li>3 Full Projects (3-tier, .Net, EKS Mega)</li>
+        </ul>
+        <div class="card-footer">⏱ ~12h — Sabse comprehensive K8s course</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Kubernetes — Cluster Management & RBAC</div>
+          <div class="card-icon">🔐</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Detail</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>HA Cluster Setup, Maintenance Window</li>
+          <li>Cluster Upgrade, RBAC Labs</li>
+          <li>Service Accounts, Node Affinity Labs</li>
+          <li>K8s Troubleshooting, GCP Cluster</li>
+        </ul>
+        <div class="card-footer">⏱ ~6h — Cluster management depth</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">HELM — Package Manager for K8s</div>
+          <div class="card-icon">⛵</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>HELM Charts, Repos, Custom Values</li>
+          <li>Upgrade, Rollback, Release Records</li>
+          <li>Create Custom Charts, Templates</li>
+          <li>Chart Dependencies, Loops, Conditions</li>
+        </ul>
+        <div class="card-footer">⏱ ~5h — Deepest HELM coverage</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">ArgoCD & GitOps</div>
+          <div class="card-icon">🔄</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>GitOps Principles, ArgoCD Architecture</li>
+          <li>App-of-Apps, Multi-Cluster Management</li>
+          <li>ApplicationSets, Helm/Kustomize</li>
+          <li>ArgoCD Monitoring, RBAC, SSO with Dex</li>
+          <li>High Availability + E2E CI/CD Project</li>
+        </ul>
+        <div class="card-footer">⏱ ~8h — Sabse detailed ArgoCD section</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase ph6" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 06</div>
+      <div class="phase-title">🏗️ Infrastructure as Code — Terraform & Ansible</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Terraform — Complete IaC</div>
+          <div class="card-icon">🌍</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>HCL Deep Dive — Blocks, Loops, Conditions</li>
+          <li>State Management, Remote Backends (S3+DynamoDB)</li>
+          <li>Workspaces, Modules, Provisioners</li>
+          <li>EKS Cluster Deployment Project</li>
+          <li>Terraform with CI/CD & Ansible</li>
+        </ul>
+        <div class="card-footer">⏱ ~7h+ — Most detailed Terraform section</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Terraform — Certification Prep & Packer</div>
+          <div class="card-icon">📜</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive Topic</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>HashiCorp Associate Certification Prep</li>
+          <li>Packer — Create Custom AMI</li>
+          <li>Terraform + Packer combo</li>
+          <li>GCP Terraform, ELK via Terraform</li>
+        </ul>
+        <div class="card-footer">⏱ ~4h — Certification + Packer sirf C3 mein</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Ansible — Complete Configuration Management</div>
+          <div class="card-icon">🤖</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Ad-hoc, Playbooks, Roles, Galaxy</li>
+          <li>Dynamic Inventory (AWS, GCP, DO)</li>
+          <li>Vault, Error Handling, Block/Rescue</li>
+          <li>Docker with Ansible, REST API calls</li>
+          <li>Realtime Application Install</li>
+        </ul>
+        <div class="card-footer">⏱ ~10h+ — Sabse comprehensive Ansible</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 7 -->
+  <div class="phase ph7" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 07</div>
+      <div class="phase-title">📊 Monitoring, Security & Production Projects</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Monitoring — Prometheus, Grafana & Loki</div>
+          <div class="card-icon">📈</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Prometheus Setup, Node Exporter</li>
+          <li>PromQL, Grafana Dashboards & Alerts</li>
+          <li>Loki + Alloy for Logs & Metrics</li>
+          <li>Slack Notifications for Alerts</li>
+        </ul>
+        <div class="card-footer">⏱ ~2.5h — Dedicated monitoring section</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">DevSecOps & Security</div>
+          <div class="card-icon">🔒</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive Topic</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>OWASP, Trivy Security Scanning</li>
+          <li>SonarQube Code Quality Analysis</li>
+          <li>DevSecOps in Jenkins Pipeline</li>
+        </ul>
+        <div class="card-footer">⏱ ~1h — DevSecOps sirf Course 1 mein</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Mega Production Project (K8s to Prod)</div>
+          <div class="card-icon">🏆</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Capstone</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Amazon EKS Auto Mode</li>
+          <li>Terraform IaC + Microservices Architecture</li>
+          <li>GitOps + ECR + GitHub Actions</li>
+          <li>Full CI/CD Pipeline in Production</li>
+          <li>ArgoCD sync, Troubleshooting</li>
+        </ul>
+        <div class="card-footer">⏱ ~2h 30m — End-to-end production deployment</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">VProfile Multi-Stack Project</div>
+          <div class="card-icon">🛠️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Project</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Manual + Automated VM Setup</li>
+          <li>AWS Lift & Shift + Re-architecture</li>
+          <li>Beanstalk, RDS, ElastiCache, RabbitMQ</li>
+          <li>K8s Deployment, GitOps with EKS</li>
+        </ul>
+        <div class="card-footer">⏱ ~8h+ — Progressive project across full stack</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 8 -->
+  <div class="phase ph8" onclick="togglePhase(this)">
+    <div class="phase-header">
+      <div class="phase-number">PHASE 08</div>
+      <div class="phase-title">🎁 Advanced & Extra Topics</div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Istio Service Mesh</div>
+          <div class="card-icon">🕸️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Istio Architecture & Installation on K8s</li>
+          <li>Traffic Management, Canary Deployments</li>
+          <li>Retry Policy & Service-to-Service security</li>
+        </ul>
+        <div class="card-footer">⏱ ~30m — Sirf Course 1 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Kubeless — Serverless on K8s</div>
+          <div class="card-icon">⚡</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>What is Serverless in Kubernetes</li>
+          <li>Kubeless Installation & Function Deploy</li>
+          <li>FaaS on top of existing K8s cluster</li>
+        </ul>
+        <div class="card-footer">⏱ ~24m — Sirf Course 3 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Packer — Custom AMI Builder</div>
+          <div class="card-icon">📦</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Packer Introduction & Installation</li>
+          <li>Create Custom AMI (2 Scenarios)</li>
+          <li>Terraform + Packer Integration</li>
+        </ul>
+        <div class="card-footer">⏱ ~37m — Sirf Course 3 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">AWS Lambda & Serverless</div>
+          <div class="card-icon">λ</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>AWS Lambda Functions setup</li>
+          <li>EC2 Logs pipeline with Lambda</li>
+          <li>Event-driven serverless automation</li>
+        </ul>
+        <div class="card-footer">⏱ ~18m — Sirf Course 3 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">ELK Stack — Logging & Search</div>
+          <div class="card-icon">🔍</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Elasticsearch, Logstash, Kibana basics</li>
+          <li>Deploy ELK & Execute queries</li>
+          <li>Install ELK via Terraform</li>
+        </ul>
+        <div class="card-footer">⏱ ~34m — Sirf Course 3 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">GCP DevOps Project</div>
+          <div class="card-icon">🌏</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>GCP VPC, Subnets, Firewall Rules</li>
+          <li>Cloud SQL, Memorystore, Cloud DNS</li>
+          <li>Managed Instance Group (MIG)</li>
+          <li>Global HTTP/HTTPS Load Balancer + SSL</li>
+        </ul>
+        <div class="card-footer">⏱ ~1.5h — GCP project sirf Course 2 mein</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">AWS Elastic Beanstalk</div>
+          <div class="card-icon">🌱</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Beanstalk Environment Setup</li>
+          <li>RDS + ElastiCache + Amazon MQ integration</li>
+          <li>Build, Deploy & CloudFront CDN</li>
+          <li>CI/CD with Beanstalk via CodePipeline</li>
+        </ul>
+        <div class="card-footer">⏱ ~1h — Full Beanstalk workflow</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Ansible for AWS VPC Automation</div>
+          <div class="card-icon">🤖</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#0088ff;border-color:rgba(0,136,255,0.3)">Course 2</span>
+          <span class="badge badge-level" style="background:rgba(0,136,255,0.1);color:#0088ff">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>VPC Variables, Subnets, IGW, Route Tables</li>
+          <li>NAT Gateway, Bastion Host via Ansible</li>
+          <li>Full Stack EC2 + Load Balancer via Playbook</li>
+          <li>Dynamic Inventory & Variables</li>
+        </ul>
+        <div class="card-footer">⏱ ~3h — AWS infra automation via Ansible</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">Maven Build Tool</div>
+          <div class="card-icon">🔨</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Best Coverage</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Maven Introduction & Installation (Win/Mac)</li>
+          <li>Build Lifecycle, POM.xml Structure</li>
+          <li>Generate Maven Project from CLI</li>
+          <li>Maven + NodeJS + AI comparison</li>
+        </ul>
+        <div class="card-footer">⏱ ~50m — Sirf Course 3 mein detail mein</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">HashiCorp Terraform Certification</div>
+          <div class="card-icon">🏅</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>IaC Concepts, Terraform Purpose & Basics</li>
+          <li>CLI, Modules, Workflow, State</li>
+          <li>Terraform Cloud & Enterprise</li>
+          <li>6 Sets of Practice Questions</li>
+        </ul>
+        <div class="card-footer">⏱ ~1.5h — Exam prep sirf Course 3 mein</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">ArgoCD Image Updater</div>
+          <div class="card-icon">🖼️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#ff6b35;border-color:rgba(255,107,53,0.3)">Course 1</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>Auto-update container images via GitOps</li>
+          <li>Integration with ArgoCD & image registry</li>
+          <li>Automated CD without manual trigger</li>
+        </ul>
+        <div class="card-footer">⏱ ~33m — Sirf Course 1 mein hai</div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-title">GCP Terraform & Remote State</div>
+          <div class="card-icon">☁️</div>
+        </div>
+        <div class="card-meta">
+          <span class="badge badge-course" style="color:#00ff88;border-color:rgba(0,255,136,0.3)">Course 3</span>
+          <span class="badge badge-level" style="background:rgba(0,255,136,0.1);color:#00ff88">Exclusive</span>
+        </div>
+        <div class="divider"></div>
+        <div class="topics-label">Key Topics</div>
+        <ul class="topics-list">
+          <li>GCP vs Google Deployment Manager</li>
+          <li>Setup GCP Project for Terraform</li>
+          <li>Remote State File in Cloud Storage</li>
+        </ul>
+        <div class="card-footer">⏱ ~16m — Multi-cloud Terraform sirf C3 mein</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    // 3 Courses · 8 Phases · Basics → Production Mastery
+  </div>
+
+</div>
+
+<script>
+function togglePhase(el) {
+  el.classList.toggle('collapsed');
+}
+</script>
+</body>
+</html>

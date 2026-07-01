@@ -1,0 +1,119 @@
+[INFO] Application starting...
+[DEBUG] Loading configuration.
+# Initial configuration section
+[INFO] Environment set to development.
+[DEBUG] Connecting to database.
+[INFO] Database connection established.
+
+# User authentication module
+[INFO] Authentication service started.
+[DEBUG] Loading user credentials cache.
+[WARN] Cache miss for user id: 101.
+[INFO] User login request received.
+[INFO] User authenticated successfully.
+
+  # This is an indented comment
+[DEBUG] Generating session token.
+[INFO] Session token generated.
+[DEBUG] Writing session to Redis.
+[INFO] Session stored successfully.
+
+[INFO] Starting background jobs.
+[DEBUG] Scheduler initialized.
+[INFO] Email worker started.
+[INFO] Notification worker started.
+[DEBUG] Queue length: 0.
+
+# Payment service logs
+[INFO] Payment service initialized.
+[DEBUG] Loading payment gateway config.
+[INFO] Stripe API key loaded.
+[WARN] Sandbox mode enabled.
+[INFO] Payment request received.
+[DEBUG] Validating payment payload.
+[INFO] Payment processed successfully.
+
+[DEBUG] Checking inventory service.
+[INFO] Inventory service available.
+[INFO] Reserving stock for order id: 2001.
+[DEBUG] Reserved quantity: 2.
+[INFO] Stock reservation successful.
+
+# Shipping module
+[INFO] Shipping service started.
+[DEBUG] Loading shipping zones.
+[INFO] Shipping zones loaded.
+[INFO] Creating shipment for order id: 2001.
+[DEBUG] Shipment id generated.
+[INFO] Shipment created successfully.
+
+[INFO] Sending order confirmation email.
+[DEBUG] Email template loaded.
+[INFO] Confirmation email sent.
+
+# Analytics events
+[DEBUG] Tracking page view.
+[INFO] Event queued successfully.
+[DEBUG] Flushing analytics buffer.
+[INFO] Analytics data uploaded.
+
+[WARN] Slow database query detected.
+[DEBUG] Query execution time: 4.8 seconds.
+[INFO] Query completed.
+
+[INFO] Starting report generation.
+[DEBUG] Fetching report data.
+[INFO] Report data fetched successfully.
+[DEBUG] Rendering PDF.
+[INFO] PDF generated.
+
+# File uploads
+[INFO] Upload request received.
+[DEBUG] Validating file type.
+[INFO] File validation passed.
+[DEBUG] Uploading file to storage.
+[INFO] File uploaded successfully.
+
+[INFO] Starting cleanup job.
+[DEBUG] Deleting temporary files.
+[INFO] Temporary files deleted.
+[DEBUG] Removing expired sessions.
+[INFO] Expired sessions removed.
+
+# Error simulation
+[INFO] Processing request id: 123.
+[DEBUG] Parsing payload.
+[ERROR] Failed to process request id: 123.
+[INFO] Retrying request.
+[DEBUG] Retry attempt: 1.
+[INFO] Request processed successfully.
+
+[INFO] Starting backup process.
+[DEBUG] Compressing files.
+[INFO] Compression completed.
+[DEBUG] Uploading backup archive.
+[INFO] Backup uploaded successfully.
+
+  # Another indented comment
+[INFO] Monitoring service heartbeat.
+[DEBUG] CPU usage: 41%.
+[DEBUG] Memory usage: 68%.
+[INFO] System health check passed.
+
+[INFO] Starting deployment.
+[DEBUG] Pulling latest Docker image.
+[INFO] Docker image downloaded.
+[DEBUG] Restarting containers.
+[INFO] Containers restarted successfully.
+
+[WARN] High memory consumption detected.
+[DEBUG] Running garbage collection.
+[INFO] Memory usage normalized.
+
+# Final section
+[INFO] Shutting down workers.
+[DEBUG] Closing database connections.
+[INFO] Database connections closed.
+[DEBUG] Flushing logs to disk.
+[INFO] Logs flushed successfully.
+[INFO] Application shutdown complete.

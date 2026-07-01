@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/gungun-navneet/Documents/Courses/Devops/Vagrant-vms/Centos","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

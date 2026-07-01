@@ -1,0 +1,16 @@
+git init
+ls -a
+git status
+git add testing.py
+git status
+git commit -m 'adding testing file'
+git status
+
+ git remote add origin https://github.com/cuoda/learning-git-and-github.git
+ git remote -v
+ git push origin master
+git remote set-url origin https://<TOKEN>@github.com/cuoda/learning-git-and-github.git
+  git remote -v
+  git push origin master
+
+

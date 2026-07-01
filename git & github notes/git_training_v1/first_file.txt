@@ -1,0 +1,3 @@
+this is my first git commit
+now the git tracked this file 
+hii adding a new line
