@@ -1,0 +1,10 @@
+{
+    "deployment": "frontend-v2",
+    "replicas": 3,
+    "ports": [
+        80,
+        443
+    ],
+    "health_check": true,
+    "logs_enabled": null
+}
